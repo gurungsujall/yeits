@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Management System</title>
+    <style>
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .subtopic-content {
+            display: none;
+        }
+        .arrow-down {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #fff;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        .rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsJCQcJCQcJCQkJCwkJCQkJCQsJCwsMCwsLDA0QDBEODQ4MEhkSJRodJR0ZHxwpKRYlNzU2GioyPi0pMBk7IRP/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCAEfAR8DASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAEGAwQFBwL/xABHEAABBAIABAMFBAcECQIHAAABAAIDBAURBhIhMRNBURQiYYHhB3GRoRUjMkJSgrEWYnKyJCUzNHWSosHRNbNDY3N0hJTC/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAEDBQQCBv/EADARAAICAQMDAwIDCQEAAAAAAAABAgMRBBIhMUFRBRMiI2EygfAGFTNCcZGhsdHB/9oADAMBAAIRAxEAPwD1tPoifRAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREA9UT1RAEREAREQBERAE+iJ9EAREQBERAEREBClQpQBERAEREAREQBERAEREAREQBERAEREAREQD1RPVEAREQBERAEREAT6In0QBFClAERQgJREQBFClAEREAREQBERAEREAREQBERAEREAREQBEUICfVE9UQBFClAEREAREQBPoifRAQpREAUKUQBERAQpREAREQBERAEREARFCAlERAEREAREQBERAFClEA9UT1RAQpREAREQBERAE+iJ9EBClEQBQpRAEREBClEQBERAERc/K5fG4as61em5GbLY2NHNLM8DfJEzzP5DzIHVCG8G+q/k+MOGsYXxvtGzYZ0dBRAmc0+jn7EYPqC7fwXnOd4vzGZLoWufUovPIyrXcS+bZ6CV7fecT/COnwPc4YOGbUcUVrN26+EqPG4222mW9M3/AOVUjPN+PX4Lxu8HM72+IIsNv7SbziRRxcEbfJ1uV8rj8eSLkH/UVjocTce5l1t9WxialWoGG1btxshqQF/7LXPkL3cx9Nefx68X2jgWn0gxWRyz9dZspb9mhJ9WwVxrX3tC248vgcnj7OHuVq2CrutQ3q1jGVnzRePG0scLUQPMdjsR+XL1jP3K1N5+UjfvcVcdYaaKO6/GWGTxiatNFEJK1iI/vxSR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" alt="University Logo" class="logo">
+        <h1>Institute Management System</h1>
+    </header>
+    
+    <h2 onclick="toggleSubtopic('studentInfo')">
+        Student Information Management
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="studentInfo" class="subtopic-content">
+        <p>Personal Information</p>
+        <p>Academic History</p>
+        <p>Attendance</p>
+        <p>Disciplinary Records</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('admissionEnrollment')">
+        Admission and Enrollment Management
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="admissionEnrollment" class="subtopic-content">
+        <p>Admissions Process</p>
+        <p>Online Application</p>
+        <p>Online Forms</p>
+        <p>Document Submission</p>
+        <p>Application Status Tracking</p>
+        <p>Manage Enrollment</p>
+        <p>Class Allocation</p>
+        <p>Student Transfers</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('classroomSchedule')">
+        Classroom and Schedule Management
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="classroomSchedule" class="subtopic-content">
+        <p>Timetables</p>
+        <p>Schedules</p>
+        <p>Resource Allocation</p>
+        <p>Manage Classroom Assignments</p>
+        <p>Equipment Bookings</p>
+        <p>Facilities Scheduling</p>
+        <p>CA Projects</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('staffManagement')">
+        Staff Management
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="staffManagement" class="subtopic-content">
+        <p>Staff Profiles</p>
+        <p>Teachers</p>
+        <p>Administrators</p>
+        <p>Support Staff</p>
+        <p>Manage Staff Attendance</p>
+        <p>Leave Requests</p>
+        <p>Performance Evaluations</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('feeManagement')">
+        Fee Management
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="feeManagement" class="subtopic-content">
+        <p>Fee Collection Processes</p>
+        <p>Fee Generation</p>
+        <p>Invoicing</p>
+        <p>Payment Tracking</p>
+        <p>Installment</p>
+        <p>Paying through Scheme</p>
+        <p>Evaluations</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('examGrading')">
+        Examination and Grading Management
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="examGrading" class="subtopic-content">
+        <p>Schedule Examinations</p>
+        <p>Generate Hall Tickets</p>
+        <p>Exam Centers and Invigilators</p>
+        <p>Student Grades</p>
+        <p>Transcripts</p>
+        <p>Academic Performance Evaluations</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('communicationCollaboration')">
+        Communication and Collaboration
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="communicationCollaboration" class="subtopic-content">
+        <p>Communication between Students</p>
+        <p>Communication with Parents</p>
+        <p>Communication with Teachers</p>
+        <p>Communication with Administrators</p>
+        <p>Relevant Information Evaluations</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('libraryManagement')">
+        Library Management System
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="libraryManagement" class="subtopic-content">
+        <p>Library Resources</p>
+        <p>Book Cataloging</p>
+        <p>Circulation and Inventory Management</p>
+        <p>Available Books</p>
+        <p>Apply Books</p>
+        <p>Evaluations</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('analyticReporting')">
+        Analytics and Reporting
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="analyticReporting" class="subtopic-content">
+        <p>Generate Report</p>
+        <p>Attendance</p>
+        <p>Fee Collections</p>
+        <p>Key Metrics Evaluations</p>
+    </div>
+
+    <h2 onclick="toggleSubtopic('securityDataPrivacy')">
+        Security and Data Privacy
+        <span class="arrow-down"></span>
+    </h2>
+    <div id="securityDataPrivacy" class="subtopic-content">
+        <p>Security Measures</p>
+        <p>Student Data</p>
+        <p>Staff Data</p>
+        <p>Role-based Access Control</p>
+        <p>Data Encryption</p>
+        <p>Regulation GDPR</p>
+        <p>Regulation FERPA</p>
+        <p>Evaluations</p>
+    </div>
+
+    <script>
+        function toggleSubtopic(subtopicId) {
+            var subtopic = document.getElementById(subtopicId);
+            var arrow = document.querySelector('#' + subtopicId + ' .arrow-down');
+            if (subtopic.style.display === "none") {
+                subtopic.style.display = "block";
+                arrow.classList.add('rotate');
+            } else {
+                subtopic.style.display = "none";
+                arrow.classList.remove('rotate');
+            }
+        }
+    </script>
+</body>
+</html>
